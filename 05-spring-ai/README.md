@@ -1,85 +1,27 @@
-# DIO Spring Boot - Final Project 05: Spring AI (budgeting)
+# API Inteligente de Orçamento Financeiro - Spring Boot + Spring AI
 
-## Introduction
+Projeto desenvolvido como Desafio de Projeto do Bootcamp Itaú - Java com Inteligência Artificial da DIO.
 
-This final module applies Spring AI in a budgeting API while preserving the same layered architecture used across the track.
+## O que o projeto faz
 
-The goal is to integrate AI capabilities without bypassing domain and use case boundaries.
+Uma API REST de orçamento financeiro que integra Inteligência Artificial para:
+- Receber comandos de voz (áudio) via endpoint REST.
+- Transcrever áudio em texto usando o modelo Whisper da OpenAI.
+- Interpretar a intenção do usuário com IA (ChatClient + Tool Calling).
+- Executar ações reais (criar ou listar transações financeiras no banco de dados).
+- Responder em áudio (Text-to-Speech) com o resultado da operação.
 
-## Code Context
+## Tecnologias utilizadas
 
-The project processes voice commands to create and query financial transactions.
+- Java 25
+- Spring Boot 4.0.5
+- Spring AI 2.0.0-M4 (OpenAI)
+- Spring Data JPA + MySQL
+- Docker Compose
+- Lombok
+- Gradle
 
-Primary flow:
+## Como executar
 
-1. Client uploads an audio file.
-2. Audio is transcribed into text.
-3. The model selects an application tool/use case.
-4. The use case persists or queries transaction data.
-5. The final response is converted to audio.
-
-## Project Structure
-
-- `src/main/java/dio/budgeting/domain`
-  - Domain model and repository contract.
-- `src/main/java/dio/budgeting/application`
-  - Use cases used by both REST and AI tool calling.
-- `src/main/java/dio/budgeting/infrastructure`
-  - HTTP adapters, JPA adapters, and integration glue.
-
-## Module-Specific Topics
-
-### Speech-to-text
-
-- Uses `TranscriptionModel` for audio transcription.
-- Model settings are configured in `application.properties`.
-
-### Tool calling
-
-- `ChatClient` registers use-case tools.
-- `@Tool` methods expose business capabilities to the model.
-
-### Text-to-speech
-
-- `TextToSpeechModel` produces MP3 output from final text.
-- AI endpoint returns generated audio.
-
-## Spring AI Documentation
-
-- Spring AI Reference: https://docs.spring.io/spring-ai/reference/index.html
-- ChatModel API: https://docs.spring.io/spring-ai/reference/api/chatmodel.html
-- ChatClient API: https://docs.spring.io/spring-ai/reference/api/chatclient.html
-- Tools API: https://docs.spring.io/spring-ai/reference/api/tools.html
-- Audio Transcriptions API: https://docs.spring.io/spring-ai/reference/api/audio/transcriptions.html
-- Audio Speech API: https://docs.spring.io/spring-ai/reference/api/audio/speech.html
-
-## Shared Architecture References
-
-Common architecture concepts are documented in the root README:
-
-- [DDD layers](../README.md#ddd-layered-architecture)
-- [Class vs record](../README.md#java-class-vs-java-record-in-domain-modeling)
-- [Strong typed identifiers](../README.md#strong-typed-identifiers)
-- [Repository pattern](../README.md#repository-pattern)
-- [Use cases and Clean Architecture](../README.md#use-cases-and-clean-architecture)
-- [Docker Compose support](../README.md#docker-compose-support-in-development)
-
-## How to Run
-
-Set your OpenAI API key:
-
-```bash
-export OPENAI_API_KEY="your_api_key_here"
-```
-
-Run the application and tests:
-
-```bash
-./gradlew bootRun
-./gradlew test
-```
-
-## Notes
-
-- Educational final project focused on AI plus architectural discipline.
-- External provider integration tests may require active credentials.
+1. Configure sua chave da OpenAI:
+   export OPENAI_API_KEY="sua_chave_aqui"
